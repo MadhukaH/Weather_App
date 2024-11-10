@@ -1,2 +1,2 @@
 # Weather_App
-Login | Sign-in | Sign-up Pages 
+Login | Sign-up | Dashboard Pages 
