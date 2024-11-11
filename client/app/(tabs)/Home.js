@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 export default function WeatherApp() {
   const [darkMode, setDarkMode] = useState(false);
@@ -30,17 +30,6 @@ export default function WeatherApp() {
       contentContainerStyle={styles.container} 
       showsVerticalScrollIndicator={true}
     >
-      {/* Dark Mode Toggle Switch */}
-      <View style={styles.switchContainer}>
-        <Text style={styles.modeText}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
-          onValueChange={toggleSwitch}
-          value={darkMode}
-        />
-      </View>
-
       {/* Current Weather Section */}
       <View style={styles.topSection}>
         <Image
@@ -55,10 +44,21 @@ export default function WeatherApp() {
         </View>
       </View>
 
+      {/* Dark Mode Toggle Switch */}
+      <View style={styles.switchContainer}>
+        <Text style={styles.modeText}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
+          onValueChange={toggleSwitch}
+          value={darkMode}
+        />
+      </View>
+
       {/* Settings and Search Bar */}
       <View style={styles.searchSection}>
         <TouchableOpacity style={styles.settingsButton}>
-          <FontAwesome name="user" size={24} color="#555" />
+          <FontAwesome name="user" size={30} color="#555" />
         </TouchableOpacity>
         <TextInput
           style={styles.searchInput}
@@ -103,10 +103,16 @@ export default function WeatherApp() {
       {/* Alerts Section */}
       <View style={styles.alertSection}>
         <Text style={styles.sectionTitle}>Alerts</Text>
-        <Image
-          source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Sri_Lanka_location_map.svg/768px-Sri_Lanka_location_map.svg.png' }}
-          style={styles.map}
-        />
+        <View style={styles.mapsContainer}>
+          <Image
+            source={{ uri: 'https://i.postimg.cc/NfFtSypb/Screenshot-2024-11-11-154118.png' }}
+            style={styles.map}
+          />
+          <Image
+            source={{ uri: 'https://i.postimg.cc/Hx0s2VTH/Screenshot-2024-11-11-155739.png' }}
+            style={styles.map}
+          />
+        </View>
       </View>
 
       {/* Log Out Button */}
@@ -123,16 +129,6 @@ const lightStyles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#E6F7FF',
     padding: 16,
-  },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  modeText: {
-    fontSize: 16,
-    marginRight: 10,
-    color: '#333',
   },
   topSection: {
     flexDirection: 'row',
@@ -157,6 +153,17 @@ const lightStyles = StyleSheet.create({
   },
   weatherDetails: {
     fontSize: 14,
+    color: '#333',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    justifyContent: 'center',
+  },
+  modeText: {
+    fontSize: 16,
+    marginRight: 10,
     color: '#333',
   },
   searchSection: {
@@ -241,13 +248,18 @@ const lightStyles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
   },
+  mapsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
   map: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
+    width: '49%',
+    height: 300,
+    borderRadius: 25,
   },
   logoutButton: {
-    backgroundColor: '#FF7043',
+    backgroundColor: '#9370DB',
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
@@ -266,16 +278,6 @@ const darkStyles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#333',
     padding: 16,
-  },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  modeText: {
-    fontSize: 16,
-    marginRight: 10,
-    color: '#FFF',
   },
   topSection: {
     flexDirection: 'row',
@@ -302,6 +304,17 @@ const darkStyles = StyleSheet.create({
     fontSize: 14,
     color: '#FFF',
   },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    justifyContent: 'center',
+  },
+  modeText: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '#FFF',
+  },
   searchSection: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -319,7 +332,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   realTimeSection: {
-    backgroundColor: '#666',
+    backgroundColor: '#FF7043',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -345,7 +358,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   forecastSection: {
-    backgroundColor: '#444',
+    backgroundColor: '#FF5722',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -367,7 +380,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   climateInfoSection: {
-    backgroundColor: '#5C6BC0',
+    backgroundColor: '#4CAF50',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -381,17 +394,22 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   alertSection: {
-    backgroundColor: '#EF9A9A',
+    backgroundColor: '#FF7043',
     borderRadius: 10,
     padding: 16,
   },
+  mapsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
   map: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
+    width: '48%',
+    height: 300,
+    borderRadius: 25,
   },
   logoutButton: {
-    backgroundColor: '#FF7043',
+    backgroundColor: '#9370DB',
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
