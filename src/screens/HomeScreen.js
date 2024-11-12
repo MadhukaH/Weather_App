@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
-import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
-export default function WeatherApp() {
+export default function WeatherApp({ navigation }) {
   const [darkMode, setDarkMode] = useState(false);
   const toggleSwitch = () => setDarkMode(previousMode => !previousMode);
 
@@ -17,7 +17,7 @@ export default function WeatherApp() {
         },
         {
           text: "Log Out",
-          onPress: () => console.log("Logged out")
+          onPress: () => navigation.navigate("Login")
         }
       ]
     );
@@ -30,6 +30,17 @@ export default function WeatherApp() {
       contentContainerStyle={styles.container} 
       showsVerticalScrollIndicator={true}
     >
+      {/* Dark Mode Toggle Switch */}
+      <View style={styles.switchContainer}>
+        <Text style={styles.modeText}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
+          onValueChange={toggleSwitch}
+          value={darkMode}
+        />
+      </View>
+
       {/* Current Weather Section */}
       <View style={styles.topSection}>
         <Image
@@ -42,17 +53,6 @@ export default function WeatherApp() {
           <Text style={styles.weatherDetails}>Humidity: 64%</Text>
           <Text style={styles.weatherDetails}>Wind: 24 km/h</Text>
         </View>
-      </View>
-
-      {/* Dark Mode Toggle Switch */}
-      <View style={styles.switchContainer}>
-        <Text style={styles.modeText}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
-          onValueChange={toggleSwitch}
-          value={darkMode}
-        />
       </View>
 
       {/* Settings and Search Bar */}
@@ -130,6 +130,17 @@ const lightStyles = StyleSheet.create({
     backgroundColor: '#E6F7FF',
     padding: 16,
   },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    justifyContent: 'center',
+  },
+  modeText: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '#333',
+  },
   topSection: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -155,33 +166,34 @@ const lightStyles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-    justifyContent: 'center',
-  },
-  modeText: {
-    fontSize: 16,
-    marginRight: 10,
-    color: '#333',
-  },
-  searchSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  settingsButton: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    backgroundColor: '#A5D6A7',
-    borderRadius: 10,
-    padding: 10,
-    fontSize: 16,
-    color: '#333',
-  },
+// Add to Light Mode Styles
+searchSection: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 16,
+  backgroundColor: '#F0F4F8',
+  borderRadius: 20,
+  padding: 10,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.2,
+  shadowRadius: 4,
+  elevation: 5, // for Android
+},
+settingsButton: {
+  marginRight: 8,
+  padding: 6,
+  borderRadius: 15,
+  backgroundColor: '#B0BEC5',
+},
+searchInput: {
+  flex: 1,
+  backgroundColor: '#E3F2FD',
+  borderRadius: 15,
+  padding: 10,
+  fontSize: 16,
+  color: '#333',
+},
   realTimeSection: {
     backgroundColor: '#FFCC80',
     borderRadius: 10,
@@ -247,19 +259,22 @@ const lightStyles = StyleSheet.create({
     backgroundColor: '#EF9A9A',
     borderRadius: 10,
     padding: 16,
+    
   },
   mapsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
   },
+
   map: {
     width: '49%',
     height: 300,
     borderRadius: 25,
   },
+
   logoutButton: {
-    backgroundColor: '#9370DB',
+    backgroundColor: '#FF7043',
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
@@ -278,6 +293,16 @@ const darkStyles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#333',
     padding: 16,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modeText: {
+    fontSize: 16,
+    marginRight: 10,
+    color: '#FFF',
   },
   topSection: {
     flexDirection: 'row',
@@ -304,35 +329,36 @@ const darkStyles = StyleSheet.create({
     fontSize: 14,
     color: '#FFF',
   },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-    justifyContent: 'center',
-  },
-  modeText: {
-    fontSize: 16,
-    marginRight: 10,
-    color: '#FFF',
-  },
-  searchSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  settingsButton: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    backgroundColor: '#555',
-    borderRadius: 10,
-    padding: 10,
-    fontSize: 16,
-    color: '#FFF',
-  },
+// Add to Dark Mode Styles
+searchSection: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 16,
+  backgroundColor: '#444',
+  borderRadius: 20,
+  padding: 10,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.5,
+  shadowRadius: 5,
+  elevation: 5, // for Android
+},
+settingsButton: {
+  marginRight: 8,
+  padding: 6,
+  borderRadius: 15,
+  backgroundColor: '#666',
+},
+searchInput: {
+  flex: 1,
+  backgroundColor: '#555',
+  borderRadius: 15,
+  padding: 10,
+  fontSize: 16,
+  color: '#FFF',
+},
   realTimeSection: {
-    backgroundColor: '#FF7043',
+    backgroundColor: '#666',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -358,7 +384,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   forecastSection: {
-    backgroundColor: '#FF5722',
+    backgroundColor: '#444',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -380,7 +406,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   climateInfoSection: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#5C6BC0',
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -394,7 +420,7 @@ const darkStyles = StyleSheet.create({
     color: '#FFF',
   },
   alertSection: {
-    backgroundColor: '#FF7043',
+    backgroundColor: '#EF9A9A',
     borderRadius: 10,
     padding: 16,
   },
@@ -403,13 +429,14 @@ const darkStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
+
   map: {
-    width: '48%',
+    width: '49%',
     height: 300,
     borderRadius: 25,
   },
   logoutButton: {
-    backgroundColor: '#9370DB',
+    backgroundColor: '#FF7043',
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
