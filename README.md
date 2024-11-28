@@ -1,16 +1,27 @@
+---
+
 # Weather App
 
 Welcome to the Weather App! This application allows users to check the weather in their location and other cities around the world.
 
 ## Features
 
-- **Login**: Secure login for returning users.
-- **Sign-up**: Easy sign-up process for new users.
-- **Home Page**: Displays current weather conditions and forecasts.
+- **Login**: Secure login for returning users.  
+- **Sign-up**: Easy sign-up process for new users.  
+- **Home Page**: Displays current weather conditions and forecasts.  
 
 ## Screenshots
 
-Include some screenshots of your application here.
+Here are some screenshots of the application:
+
+1. Welcome Page  
+   ![Login Page](https://i.postimg.cc/c43fH73F/Screenshot-20241111-235925-Expo-Go.jpg)
+
+2. Login Page  
+   ![Sign-up Page](https://i.postimg.cc/mkvMjkv3/Screenshot-20241111-235929-Expo-Go.jpg)
+
+3. Sign-up Page  
+   ![Home Page](https://i.postimg.cc/HWRQdvrJ/Screenshot-20241111-235957-Expo-Go.jpg)
 
 ## Installation
 
@@ -41,7 +52,7 @@ Provide instructions on how to use the app, including examples.
 
 Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
+1. Fork the repository.  
 2. Create a new branch:
     ```sh
     git checkout -b feature/YourFeature
@@ -59,3 +70,5 @@ Contributions are welcome! Please follow these steps:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
