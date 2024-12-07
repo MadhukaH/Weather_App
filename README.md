@@ -1,5 +1,4 @@
 ---
-
 # Weather App
 
 Welcome to the Weather App! This application allows users to check the weather in their location and other cities around the world.
